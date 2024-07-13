@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design - Floats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav {
+            background: #444;
+            color: white;
+            padding: 10px;
+            float: left;
+            width: 20%;
+        }
+        section {
+            float: left;
+            width: 80%;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            nav, section {
+                width: 100%;
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Responsive Design with Floats</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Main Content</h2>
+        <p>This is the main content area.</p>
+    </section>
+    <footer>
+        <p>Footer content</p>
+    </footer>
+</body>
+</html>
