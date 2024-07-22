@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab7 Scripts</title>
+</head>
+
+<body>
+    <h3>Check the logs</h3>
+
+    <script>
+        // Sum all numbers in an array
+        function sum(numbers) {
+            return numbers.reduce((acc, num) => acc + num, 0);
+        }
+
+        // Multiply all numbers in an array
+        function multiply(numbers) {
+            return numbers.reduce((acc, num) => acc * num, 1);
+        }
+
+        // Example usage
+        console.log(sum([1, 2, 3, 4])); // Output: 10
+        console.log(multiply([1, 2, 3, 4])); // Output: 24
+
+        // Reverse a string
+        function reverse(str) {
+            return str.split('').reverse().join('');
+        }
+
+        // Example usage
+        console.log(reverse("hello")); // Output: "olleh"
+
+        // Filter words longer than a given length
+        function filterLongWords(words, length) {
+            return words.filter(word => word.length > length);
+        }
+
+        // Example usage
+        console.log(filterLongWords(["apple", "banana", "cherry", "date"], 5)); // Output: ["banana", "cherry"]
+
+    </script>
+</body>
+
+</html>
