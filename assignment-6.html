@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 6 Solution</title>
+</head>
+
+<body>
+    <h3>Assignment 6 solutions. Check the console logs</h3>
+    <script>
+        // Exercise 1
+        String.prototype.filter = function (bannedWords) {
+            return this.split(' ').filter(word => !bannedWords.includes(word)).join(' ');
+        };
+
+        console.log("This house is not nice!".filter(['not'])); // Output: "This house is nice!"
+
+        // Exercise 2
+        Array.prototype.bubbleSort = function () {
+            for (let i = 0; i < this.length; i++) {
+                for (let j = 0; j < this.length - i - 1; j++) {
+                    if (this[j] > this[j + 1]) {
+                        [this[j], this[j + 1]] = [this[j + 1], this[j]];
+                    }
+                }
+            }
+            return this;
+        };
+
+        console.log([6, 4, 0, 3, -2, 1].bubbleSort()); // Output: [-2, 0, 1, 3, 4, 6]
+
+        // Exercise 3
+        function Person(name) {
+            this.name = name;
+        }
+
+        Person.prototype.teach = function (subject) {
+            console.log(`${this.name} is now teaching ${subject}`);
+        };
+
+        let teacher = new Person('Amanuel');
+        teacher.teach('Math'); // Output: John is now teaching Math
+
+        // Using Object.create
+        const teacherProto = {
+            teach: function (subject) {
+                console.log(`${this.name} is now teaching ${subject}`);
+            }
+        };
+
+        function createTeacher(name) {
+            let teacher = Object.create(teacherProto);
+            teacher.name = name;
+            return teacher;
+        }
+
+        let teacher2 = createTeacher('Jane');
+        teacher2.teach('Physics'); // Output: Jane is now teaching Physics
+
+        // Exercise 4
+        // Object Prototype Approach
+        const PersonProto = {
+            greeting: function () {
+                console.log(`Greetings, my name is ${this.name} and I am ${this.age} years old.`);
+            },
+            salute: function () {
+                console.log(`Good morning!, and in case I don't see you, good afternoon, good evening and good night!`);
+            }
+        };
+
+        const StudentProto = Object.create(PersonProto);
+        StudentProto.greeting = function () {
+            console.log(`Hey, my name is ${this.name} and I am studying ${this.major}.`);
+        };
+
+        const ProfessorProto = Object.create(PersonProto);
+        ProfessorProto.greeting = function () {
+            console.log(`Good day, my name is ${this.name} and I am in the ${this.department} department.`);
+        };
+
+        const createPerson = function (name, age) {
+            let person = Object.create(PersonProto);
+            person.name = name;
+            person.age = age;
+            return person;
+        };
+
+        const createStudent = function (name, age, major) {
+            let student = createPerson(name, age);
+            student.major = major;
+            Object.setPrototypeOf(student, StudentProto);
+            return student;
+        };
+
+        const createProfessor = function (name, age, department) {
+            let professor = createPerson(name, age);
+            professor.department = department;
+            Object.setPrototypeOf(professor, ProfessorProto);
+            return professor;
+        };
+
+        let student = createStudent('Merhawi', 20, 'Computer Science');
+        student.greeting();
+        student.salute();
+
+        let professor = createProfessor('Dr. Merhawi', 50, 'Physics');
+        professor.greeting();
+        professor.salute();
+
+        // Function Constructor Approach
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        Person.prototype.greeting = function () {
+            console.log(`Greetings, my name is ${this.name} and I am ${this.age} years old.`);
+        };
+
+        Person.prototype.salute = function () {
+            console.log(`Good morning!, and in case I don't see you, good afternoon, good evening and good night!`);
+        };
+
+        function Student(name, age, major) {
+            Person.call(this, name, age);
+            this.major = major;
+        }
+
+        Student.prototype = Object.create(Person.prototype);
+        Student.prototype.constructor = Student;
+        Student.prototype.greeting = function () {
+            console.log(`Hey, my name is ${this.name} and I am studying ${this.major}.`);
+        };
+
+        function Professor(name, age, department) {
+            Person.call(this, name, age);
+            this.department = department;
+        }
+
+        Professor.prototype = Object.create(Person.prototype);
+        Professor.prototype.constructor = Professor;
+        Professor.prototype.greeting = function () {
+            console.log(`Good day, my name is ${this.name} and I am in the ${this.department} department.`);
+        };
+
+        let student2 = new Student('Merhawi', 20, 'Computer Science');
+        student2.greeting();
+        student2.salute();
+
+        let professor2 = new Professor('Dr. Merhawi', 50, 'Physics');
+        professor2.greeting();
+        professor2.salute();
+    </script>
+
+</body>
+
+</html>
