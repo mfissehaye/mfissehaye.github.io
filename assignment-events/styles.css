@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+label {
+    margin-right: 10px;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: lightblue;
+}
