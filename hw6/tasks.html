@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task Tracking</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Modified toObject method
+        $.fn.toObject = function () {
+            return this.find('input, select').toArray().reduce(function (acc, element) {
+                acc[element.name] = element.value;
+                return acc;
+            }, {});
+        };
+
+        // Sample fromObject plugin
+        $.fn.fromObject = function (obj) {
+            return this.find('input, select').each(function () {
+                var $this = $(this);
+                if (obj.hasOwnProperty($this.attr('name'))) {
+                    $this.val(obj[$this.attr('name')]);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            // Print object to console
+            $('#printObject').click(function () {
+                var obj = $('form').toObject();
+                console.log(JSON.stringify(obj));
+            });
+
+            // Load object into form fields
+            $('#loadObject').click(function () {
+                var sampleObj = {
+                    taskName: 'Sample Task',
+                    taskDescription: 'This is a sample task description',
+                    dueDate: '2024-08-31'
+                    // Add more fields as needed
+                };
+                $('form').fromObject(sampleObj);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName"><br><br>
+
+        <label for="taskDescription">Task Description:</label>
+        <input type="text" id="taskDescription" name="taskDescription"><br><br>
+
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate"><br><br>
+
+        <!-- Add more fields as needed -->
+    </form>
+    <button id="printObject">Print object to console</button>
+    <button id="loadObject">Load object into form</button>
+</body>
+
+</html>
